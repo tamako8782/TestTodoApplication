@@ -1,78 +1,78 @@
-# Django + Flutter Todo Application
+# Django + Flutter Todo アプリケーション
 
-**Complete full-stack Todo application with Django REST API backend and Flutter mobile frontend**
+**Django REST API バックエンド + Flutter モバイルフロントエンドによる完全なフルスタック Todo アプリケーション**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Django](https://img.shields.io/badge/Django-5.2.2-green.svg)](https://djangoproject.com/)
 [![Flutter](https://img.shields.io/badge/Flutter-3.32.2-blue.svg)](https://flutter.dev/)
 
-## 🚀 Quick Start
+## 🚀 クイックスタート
 
-### 1. Clone Repository
+### 1. リポジトリのクローン
 ```bash
 git clone git@github.com:tamako8782/TestTodoApplication.git
 cd TestTodoApplication
 ```
 
-### 2. Setup Environment Variables
+### 2. 環境変数の設定
 ```bash
-# Copy environment examples
+# 環境変数のテンプレートをコピー
 cp .env.example .env
 cp todo_flutter_app/.env.example todo_flutter_app/.env
 
-# Edit .env files with your actual values
-# - Django: SECRET_KEY, ALLOWED_HOSTS, etc.
-# - Flutter: API_BASE_URL (your Django server URL)
+# .envファイルを実際の値に編集
+# - Django: SECRET_KEY, ALLOWED_HOSTS など
+# - Flutter: API_BASE_URL (Django サーバーの URL)
 ```
 
-### 3. Run Django Backend
+### 3. Django バックエンドの起動
 ```bash
-# Create virtual environment
+# 仮想環境の作成
 python3 -m venv venv
 source venv/bin/activate  # macOS/Linux
 # venv\Scripts\activate   # Windows
 
-# Install dependencies
+# 依存関係のインストール
 pip install -r requirements.txt
 
-# Setup database
+# データベースのセットアップ
 python manage.py makemigrations
 python manage.py migrate
 
-# Start Django server
+# Django サーバーの起動
 python manage.py runserver 0.0.0.0:8000
 ```
 
-### 4. Run Flutter App
+### 4. Flutter アプリの起動
 ```bash
 cd todo_flutter_app
 
-# Install Flutter dependencies
+# Flutter 依存関係のインストール
 flutter pub get
 
-# Run on your preferred platform
+# 好みのプラットフォームで実行
 flutter run --dart-define-from-file=.env
 ```
 
-## 📋 Features
+## 📋 機能
 
-### ✅ Backend (Django REST API)
-- **CRUD Operations**: Create, Read, Update, Delete todos
-- **Search Functionality**: Filter todos by title
-- **RESTful API Design**: Consistent endpoint structure
-- **Pagination Support**: Efficient data loading
-- **CORS Configuration**: Cross-origin resource sharing
-- **Environment-based Configuration**: Secure settings management
+### ✅ バックエンド (Django REST API)
+- **CRUD 操作**: Todo の作成、読み取り、更新、削除
+- **検索機能**: タイトルによる Todo フィルタリング
+- **RESTful API 設計**: 一貫性のあるエンドポイント構造
+- **ページネーション対応**: 効率的なデータ読み込み
+- **CORS 設定**: クロスオリジンリソース共有
+- **環境ベース設定**: セキュアな設定管理
 
-### ✅ Frontend (Flutter Mobile App)
-- **Cross-platform Support**: iOS, Android, Web, Desktop
-- **Material Design**: Modern, responsive UI
-- **Dark Theme**: Beautiful dark mode interface
-- **Real-time Sync**: Instant updates with backend
-- **Environment Configuration**: Dynamic API endpoint
-- **Error Handling**: User-friendly error messages
+### ✅ フロントエンド (Flutter モバイルアプリ)
+- **クロスプラットフォーム対応**: iOS, Android, Web, Desktop
+- **Material Design**: モダンでレスポンシブな UI
+- **ダークテーマ**: 美しいダークモードインターフェース
+- **リアルタイム同期**: バックエンドとの即座な更新
+- **環境設定**: 動的 API エンドポイント
+- **エラーハンドリング**: ユーザーフレンドリーなエラーメッセージ
 
-## 🏗️ Architecture
+## 🏗️ アーキテクチャ
 
 ```
 ┌─────────────────┐    HTTP API     ┌─────────────────┐
@@ -84,141 +84,141 @@ flutter run --dart-define-from-file=.env
 └─────────────────┘                 └─────────────────┘
 ```
 
-## 🛠️ Tech Stack
+## 🛠️ 技術スタック
 
-| Component | Technology | Version |
+| コンポーネント | 技術 | バージョン |
 |-----------|------------|---------|
-| **Backend** | Django | 5.2.2 |
-| **API Framework** | Django REST Framework | Latest |
-| **Database** | SQLite | Built-in |
-| **Frontend** | Flutter | 3.32.2 |
-| **State Management** | Provider | Latest |
-| **HTTP Client** | http package | Latest |
-| **UI Design** | Material Design | Latest |
+| **バックエンド** | Django | 5.2.2 |
+| **API フレームワーク** | Django REST Framework | 最新 |
+| **データベース** | SQLite | 内蔵 |
+| **フロントエンド** | Flutter | 3.32.2 |
+| **状態管理** | Provider | 最新 |
+| **HTTP クライアント** | http package | 最新 |
+| **UI デザイン** | Material Design | 最新 |
 
-## 📁 Project Structure
+## 📁 プロジェクト構造
 
 ```
 TestTodoApplication/
-├── 📄 README.md                     # This file
-├── 📄 LICENSE                       # MIT License
-├── 📄 requirements.txt              # Python dependencies
-├── 📄 .env.example                  # Django environment template
-├── 📄 .gitignore                    # Git ignore rules
-├── 📂 doc/                          # Documentation
-│   ├── 📄 README.md                 # Complete development guide
-│   ├── 📄 01_flutter_setup.md       # Flutter environment setup
-│   ├── 📄 02_xcode_config.md        # Xcode configuration
-│   ├── 📄 03_deployment.md          # Production deployment
-│   ├── 📄 04_testing.md             # Testing implementation
-│   ├── 📄 05_troubleshooting.md     # Common issues & solutions
-│   └── 📄 06_django_api.md          # REST API documentation
-├── 📂 todoproject/                  # Django project settings
-│   ├── 📄 settings.py               # Django configuration
-│   ├── 📄 urls.py                   # URL routing
-│   └── 📄 wsgi.py                   # WSGI configuration
-├── 📂 todo/                         # Django app
-│   ├── 📄 models.py                 # Data models
-│   ├── 📄 api_views.py              # REST API endpoints
-│   ├── 📄 serializers.py            # DRF serializers
-│   ├── 📄 tests.py                  # Backend tests (19 tests)
-│   └── 📂 templates/                # HTML templates
-└── 📂 todo_flutter_app/             # Flutter application
-    ├── 📄 pubspec.yaml              # Flutter dependencies
-    ├── 📄 .env.example              # Flutter environment template
-    ├── 📂 lib/                      # Dart source code
-    │   ├── 📄 main.dart             # App entry point
-    │   ├── 📂 models/               # Data models
-    │   ├── 📂 services/             # API services
-    │   ├── 📂 screens/              # UI screens
-    │   └── 📂 widgets/              # Reusable components
-    ├── 📂 test/                     # Flutter tests
-    └── 📂 ios/android/web/...       # Platform-specific files
+├── 📄 README.md                     # このファイル
+├── 📄 LICENSE                       # MIT ライセンス
+├── 📄 requirements.txt              # Python 依存関係
+├── 📄 .env.example                  # Django 環境変数テンプレート
+├── 📄 .gitignore                    # Git 除外ルール
+├── 📂 doc/                          # ドキュメント
+│   ├── 📄 README.md                 # 完全な開発ガイド
+│   ├── 📄 01_flutter_setup.md       # Flutter 環境構築
+│   ├── 📄 02_xcode_config.md        # Xcode 設定
+│   ├── 📄 03_deployment.md          # 本番デプロイ
+│   ├── 📄 04_testing.md             # テスト実装
+│   ├── 📄 05_troubleshooting.md     # よくある問題と解決方法
+│   └── 📄 06_django_api.md          # REST API ドキュメント
+├── 📂 todoproject/                  # Django プロジェクト設定
+│   ├── 📄 settings.py               # Django 設定
+│   ├── 📄 urls.py                   # URL ルーティング
+│   └── 📄 wsgi.py                   # WSGI 設定
+├── 📂 todo/                         # Django アプリ
+│   ├── 📄 models.py                 # データモデル
+│   ├── 📄 api_views.py              # REST API エンドポイント
+│   ├── 📄 serializers.py            # DRF シリアライザー
+│   ├── 📄 tests.py                  # バックエンドテスト (19テスト)
+│   └── 📂 templates/                # HTML テンプレート
+└── 📂 todo_flutter_app/             # Flutter アプリケーション
+    ├── 📄 pubspec.yaml              # Flutter 依存関係
+    ├── 📄 .env.example              # Flutter 環境変数テンプレート
+    ├── 📂 lib/                      # Dart ソースコード
+    │   ├── 📄 main.dart             # アプリエントリーポイント
+    │   ├── 📂 models/               # データモデル
+    │   ├── 📂 services/             # API サービス
+    │   ├── 📂 screens/              # UI 画面
+    │   └── 📂 widgets/              # 再利用可能コンポーネント
+    ├── 📂 test/                     # Flutter テスト
+    └── 📂 ios/android/web/...       # プラットフォーム固有ファイル
 ```
 
-## 🚀 Getting Started Guide
+## 🚀 開発ガイド
 
-### Prerequisites
+### 前提条件
 - **Python 3.8+** with pip
 - **Flutter SDK 3.0+**
-- **Git** for version control
-- **Code editor** (VS Code recommended)
+- **Git** バージョン管理
+- **コードエディター** (VS Code 推奨)
 
-### Step-by-Step Setup
+### ステップバイステップセットアップ
 
-1. **Environment Setup** 🔧
-   - Copy `.env.example` → `.env` (both Django and Flutter)
-   - Configure your database and API settings
+1. **環境セットアップ** 🔧
+   - `.env.example` → `.env` にコピー (Django と Flutter 両方)
+   - データベースと API 設定を構成
 
-2. **Backend Development** 🖥️
-   - Start with Django REST API
-   - Test endpoints at `http://localhost:8000/api/`
+2. **バックエンド開発** 🖥️
+   - Django REST API から開始
+   - `http://localhost:8000/api/` でエンドポイントをテスト
 
-3. **Frontend Development** 📱
-   - Configure Flutter app
-   - Connect to Django API
-   - Test on your preferred platform
+3. **フロントエンド開発** 📱
+   - Flutter アプリを構成
+   - Django API に接続
+   - 好みのプラットフォームでテスト
 
-4. **Integration Testing** 🧪
-   - Run Django tests: `python manage.py test`
-   - Run Flutter tests: `flutter test`
+4. **統合テスト** 🧪
+   - Django テスト実行: `python manage.py test`
+   - Flutter テスト実行: `flutter test`
 
-5. **Production Deployment** 🚀
-   - See [deployment guide](doc/03_deployment.md)
+5. **本番デプロイ** 🚀
+   - [デプロイガイド](doc/03_deployment.md) を参照
 
-## 📚 Documentation
+## 📚 ドキュメント
 
-| Guide | Description | Audience |
+| ガイド | 説明 | 対象読者 |
 |-------|-------------|----------|
-| **[Project Overview](doc/README.md)** | Complete development journey | All developers |
-| **[Flutter Setup](doc/01_flutter_setup.md)** | Flutter environment & app creation | Mobile developers |
-| **[Xcode Config](doc/02_xcode_config.md)** | iOS development setup | iOS developers |
-| **[Deployment](doc/03_deployment.md)** | Production deployment guide | DevOps engineers |
-| **[Testing](doc/04_testing.md)** | Comprehensive testing suite | QA engineers |
-| **[Troubleshooting](doc/05_troubleshooting.md)** | Common issues & solutions | All developers |
-| **[REST API](doc/06_django_api.md)** | API endpoints documentation | Backend developers |
+| **[プロジェクト概要](doc/README.md)** | 完全な開発の旅程 | 全開発者 |
+| **[Flutter セットアップ](doc/01_flutter_setup.md)** | Flutter 環境とアプリ作成 | モバイル開発者 |
+| **[Xcode 設定](doc/02_xcode_config.md)** | iOS 開発セットアップ | iOS 開発者 |
+| **[デプロイ](doc/03_deployment.md)** | 本番デプロイガイド | DevOps エンジニア |
+| **[テスト](doc/04_testing.md)** | 包括的テストスイート | QA エンジニア |
+| **[トラブルシューティング](doc/05_troubleshooting.md)** | よくある問題と解決方法 | 全開発者 |
+| **[REST API](doc/06_django_api.md)** | API エンドポイントドキュメント | バックエンド開発者 |
 
-## 🧪 Testing
+## 🧪 テスト
 
-### Backend Tests
+### バックエンドテスト
 ```bash
-# Run all Django tests
+# Django テストをすべて実行
 python manage.py test
 
-# With coverage
+# カバレッジ付き
 pip install coverage
 coverage run manage.py test
 coverage report
 ```
 
-### Frontend Tests
+### フロントエンドテスト
 ```bash
 cd todo_flutter_app
 
-# Run Flutter tests
+# Flutter テスト実行
 flutter test
 
-# Integration tests
+# 統合テスト
 flutter drive --target=test_driver/app.dart
 ```
 
-## 🛠️ Development Workflow
+## 🛠️ 開発ワークフロー
 
-1. **Feature Development**
-   - Backend: Add API endpoint → Write tests → Update documentation
-   - Frontend: Add UI → Connect to API → Write tests
+1. **機能開発**
+   - バックエンド: API エンドポイント追加 → テスト作成 → ドキュメント更新
+   - フロントエンド: UI 追加 → API 接続 → テスト作成
 
-2. **Code Quality**
-   - Python: Follow PEP 8, use black formatter
-   - Dart: Follow dart format conventions
+2. **コード品質**
+   - Python: PEP 8 に従い、black フォーマッターを使用
+   - Dart: dart format 規約に従う
 
-3. **Version Control**
-   - Feature branches: `feature/your-feature-name`
-   - Commit messages: Use conventional commits
+3. **バージョン管理**
+   - 機能ブランチ: `feature/your-feature-name`
+   - コミットメッセージ: conventional commits を使用
 
-## 🔧 Configuration
+## 🔧 設定
 
-### Environment Variables
+### 環境変数
 
 **Django (`.env`)**
 ```env
@@ -235,24 +235,24 @@ APP_NAME=Todo Flutter App
 APP_VERSION=1.0.0
 ```
 
-## 🤝 Contributing
+## 🤝 コントリビューション
 
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open Pull Request
+1. リポジトリをフォーク
+2. 機能ブランチを作成: `git checkout -b feature/amazing-feature`
+3. 変更をコミット: `git commit -m 'Add amazing feature'`
+4. ブランチにプッシュ: `git push origin feature/amazing-feature`
+5. プルリクエストを開く
 
-## 📄 License
+## 📄 ライセンス
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+このプロジェクトは MIT ライセンスの下で公開されています - 詳細は [LICENSE](LICENSE) ファイルを参照してください。
 
-## 🙋‍♂️ Support
+## 🙋‍♂️ サポート
 
-- **Documentation**: Check the [doc/](doc/) folder for detailed guides
-- **Issues**: Create an issue for bug reports or feature requests
-- **Discussions**: Use GitHub Discussions for questions
+- **ドキュメント**: 詳細なガイドは [doc/](doc/) フォルダをチェック
+- **問題報告**: バグ報告や機能リクエストは Issue を作成
+- **質問**: GitHub Discussions を利用
 
 ---
 
-**Built with ❤️ using Django and Flutter** 
+**Django と Flutter で ❤️ を込めて構築** 
