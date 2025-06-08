@@ -1,112 +1,258 @@
-# Django Todo アプリケーション
+# Django + Flutter Todo Application
 
-モダンでシンプルなTodoアプリケーションです。Djangoで構築され、美しいダークテーマのUIを持っています。
+**Complete full-stack Todo application with Django REST API backend and Flutter mobile frontend**
 
-## 機能
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Django](https://img.shields.io/badge/Django-5.2.2-green.svg)](https://djangoproject.com/)
+[![Flutter](https://img.shields.io/badge/Flutter-3.32.2-blue.svg)](https://flutter.dev/)
 
-- ✅ Todo項目の追加
-- ✅ Todo項目の完了/未完了の切り替え
-- ✅ Todo項目の削除
-- ✅ Todo項目の検索
-- ✅ レスポンシブなモダンUI
-- ✅ リアルタイムフィードバック
+## 🚀 Quick Start
 
-## セットアップ
-
-### 1. 仮想環境の作成とアクティベート
-
+### 1. Clone Repository
 ```bash
+git clone git@github.com:tamako8782/TestTodoApplication.git
+cd TestTodoApplication
+```
+
+### 2. Setup Environment Variables
+```bash
+# Copy environment examples
+cp .env.example .env
+cp todo_flutter_app/.env.example todo_flutter_app/.env
+
+# Edit .env files with your actual values
+# - Django: SECRET_KEY, ALLOWED_HOSTS, etc.
+# - Flutter: API_BASE_URL (your Django server URL)
+```
+
+### 3. Run Django Backend
+```bash
+# Create virtual environment
 python3 -m venv venv
 source venv/bin/activate  # macOS/Linux
-# または
-venv\Scripts\activate     # Windows
-```
+# venv\Scripts\activate   # Windows
 
-### 2. 依存関係のインストール
-
-```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-### 3. データベースマイグレーション
-
-```bash
+# Setup database
 python manage.py makemigrations
 python manage.py migrate
+
+# Start Django server
+python manage.py runserver 0.0.0.0:8000
 ```
 
-### 4. 開発サーバーの起動
-
+### 4. Run Flutter App
 ```bash
-python manage.py runserver
+cd todo_flutter_app
+
+# Install Flutter dependencies
+flutter pub get
+
+# Run on your preferred platform
+flutter run --dart-define-from-file=.env
 ```
 
-アプリケーションは http://localhost:8000 でアクセスできます。
+## 📋 Features
 
-## 使用方法
+### ✅ Backend (Django REST API)
+- **CRUD Operations**: Create, Read, Update, Delete todos
+- **Search Functionality**: Filter todos by title
+- **RESTful API Design**: Consistent endpoint structure
+- **Pagination Support**: Efficient data loading
+- **CORS Configuration**: Cross-origin resource sharing
+- **Environment-based Configuration**: Secure settings management
 
-1. **Todo の追加**: 画面右上の「+」ボタンをクリックして新しいTodoを追加
-2. **Todo の完了**: チェックボックスをクリックして完了/未完了を切り替え
-3. **Todo の削除**: Todoアイテムにホバーして表示される削除ボタンをクリック
-4. **Todo の検索**: 上部の検索バーでTodoを検索
+### ✅ Frontend (Flutter Mobile App)
+- **Cross-platform Support**: iOS, Android, Web, Desktop
+- **Material Design**: Modern, responsive UI
+- **Dark Theme**: Beautiful dark mode interface
+- **Real-time Sync**: Instant updates with backend
+- **Environment Configuration**: Dynamic API endpoint
+- **Error Handling**: User-friendly error messages
 
-## 技術スタック
-
-- **Backend**: Django 5.2.2
-- **Frontend**: HTML, CSS (Tailwind CSS)
-- **Database**: SQLite (開発用)
-- **JavaScript**: バニラJS (モーダル機能)
-
-## プロジェクト構造
+## 🏗️ Architecture
 
 ```
-test_todo/
-├── manage.py
-├── requirements.txt
-├── README.md
-├── todo/                    # メインアプリケーション
-│   ├── models.py           # Todoモデル
-│   ├── views.py            # ビューロジック
-│   ├── urls.py             # URL設定
-│   ├── admin.py            # 管理パネル設定
-│   └── templates/todo/     # テンプレートファイル
-│       ├── base.html
-│       ├── todo_list.html
-│       └── add_todo.html
-└── todoproject/            # プロジェクト設定
-    ├── settings.py
-    ├── urls.py
-    └── wsgi.py
+┌─────────────────┐    HTTP API     ┌─────────────────┐
+│   Flutter App   │ ◄─────────────► │  Django Backend │
+│                 │     JSON        │                 │
+│  • iOS/Android  │                 │  • REST API     │
+│  • Web/Desktop  │                 │  • SQLite DB    │
+│  • Material UI  │                 │  • Admin Panel  │
+└─────────────────┘                 └─────────────────┘
 ```
 
-## カスタマイズ
+## 🛠️ Tech Stack
 
-アプリケーションは簡単にカスタマイズできます：
+| Component | Technology | Version |
+|-----------|------------|---------|
+| **Backend** | Django | 5.2.2 |
+| **API Framework** | Django REST Framework | Latest |
+| **Database** | SQLite | Built-in |
+| **Frontend** | Flutter | 3.32.2 |
+| **State Management** | Provider | Latest |
+| **HTTP Client** | http package | Latest |
+| **UI Design** | Material Design | Latest |
 
-- **スタイル**: `todo/templates/todo/base.html` でTailwind CSSクラスを編集
-- **機能**: `todo/models.py` でTodoモデルにフィールドを追加
-- **ビュー**: `todo/views.py` で新しい機能を追加
+## 📁 Project Structure
 
-## 開発者向け
+```
+TestTodoApplication/
+├── 📄 README.md                     # This file
+├── 📄 LICENSE                       # MIT License
+├── 📄 requirements.txt              # Python dependencies
+├── 📄 .env.example                  # Django environment template
+├── 📄 .gitignore                    # Git ignore rules
+├── 📂 doc/                          # Documentation
+│   ├── 📄 README.md                 # Complete development guide
+│   ├── 📄 01_flutter_setup.md       # Flutter environment setup
+│   ├── 📄 02_xcode_config.md        # Xcode configuration
+│   ├── 📄 03_deployment.md          # Production deployment
+│   ├── 📄 04_testing.md             # Testing implementation
+│   ├── 📄 05_troubleshooting.md     # Common issues & solutions
+│   └── 📄 06_django_api.md          # REST API documentation
+├── 📂 todoproject/                  # Django project settings
+│   ├── 📄 settings.py               # Django configuration
+│   ├── 📄 urls.py                   # URL routing
+│   └── 📄 wsgi.py                   # WSGI configuration
+├── 📂 todo/                         # Django app
+│   ├── 📄 models.py                 # Data models
+│   ├── 📄 api_views.py              # REST API endpoints
+│   ├── 📄 serializers.py            # DRF serializers
+│   ├── 📄 tests.py                  # Backend tests (19 tests)
+│   └── 📂 templates/                # HTML templates
+└── 📂 todo_flutter_app/             # Flutter application
+    ├── 📄 pubspec.yaml              # Flutter dependencies
+    ├── 📄 .env.example              # Flutter environment template
+    ├── 📂 lib/                      # Dart source code
+    │   ├── 📄 main.dart             # App entry point
+    │   ├── 📂 models/               # Data models
+    │   ├── 📂 services/             # API services
+    │   ├── 📂 screens/              # UI screens
+    │   └── 📂 widgets/              # Reusable components
+    ├── 📂 test/                     # Flutter tests
+    └── 📂 ios/android/web/...       # Platform-specific files
+```
 
-### 管理パネル
+## 🚀 Getting Started Guide
 
-スーパーユーザーを作成して管理パネルにアクセス：
+### Prerequisites
+- **Python 3.8+** with pip
+- **Flutter SDK 3.0+**
+- **Git** for version control
+- **Code editor** (VS Code recommended)
 
+### Step-by-Step Setup
+
+1. **Environment Setup** 🔧
+   - Copy `.env.example` → `.env` (both Django and Flutter)
+   - Configure your database and API settings
+
+2. **Backend Development** 🖥️
+   - Start with Django REST API
+   - Test endpoints at `http://localhost:8000/api/`
+
+3. **Frontend Development** 📱
+   - Configure Flutter app
+   - Connect to Django API
+   - Test on your preferred platform
+
+4. **Integration Testing** 🧪
+   - Run Django tests: `python manage.py test`
+   - Run Flutter tests: `flutter test`
+
+5. **Production Deployment** 🚀
+   - See [deployment guide](doc/03_deployment.md)
+
+## 📚 Documentation
+
+| Guide | Description | Audience |
+|-------|-------------|----------|
+| **[Project Overview](doc/README.md)** | Complete development journey | All developers |
+| **[Flutter Setup](doc/01_flutter_setup.md)** | Flutter environment & app creation | Mobile developers |
+| **[Xcode Config](doc/02_xcode_config.md)** | iOS development setup | iOS developers |
+| **[Deployment](doc/03_deployment.md)** | Production deployment guide | DevOps engineers |
+| **[Testing](doc/04_testing.md)** | Comprehensive testing suite | QA engineers |
+| **[Troubleshooting](doc/05_troubleshooting.md)** | Common issues & solutions | All developers |
+| **[REST API](doc/06_django_api.md)** | API endpoints documentation | Backend developers |
+
+## 🧪 Testing
+
+### Backend Tests
 ```bash
-python manage.py createsuperuser
+# Run all Django tests
+python manage.py test
+
+# With coverage
+pip install coverage
+coverage run manage.py test
+coverage report
 ```
 
-http://localhost:8000/admin でアクセスできます。
-
-### テストデータの追加
-
+### Frontend Tests
 ```bash
-python manage.py shell
->>> from todo.models import Todo
->>> Todo.objects.create(title="サンプルTodo", completed=False)
+cd todo_flutter_app
+
+# Run Flutter tests
+flutter test
+
+# Integration tests
+flutter drive --target=test_driver/app.dart
 ```
 
-## ライセンス
+## 🛠️ Development Workflow
 
-このプロジェクトはMITライセンスの下で公開されています。 
+1. **Feature Development**
+   - Backend: Add API endpoint → Write tests → Update documentation
+   - Frontend: Add UI → Connect to API → Write tests
+
+2. **Code Quality**
+   - Python: Follow PEP 8, use black formatter
+   - Dart: Follow dart format conventions
+
+3. **Version Control**
+   - Feature branches: `feature/your-feature-name`
+   - Commit messages: Use conventional commits
+
+## 🔧 Configuration
+
+### Environment Variables
+
+**Django (`.env`)**
+```env
+DJANGO_SECRET_KEY=your-secret-key-here
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1,localhost,your-server-ip
+CORS_ALLOW_ALL_ORIGINS=True
+```
+
+**Flutter (`todo_flutter_app/.env`)**
+```env
+API_BASE_URL=http://your-server-ip:8000/api
+APP_NAME=Todo Flutter App
+APP_VERSION=1.0.0
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙋‍♂️ Support
+
+- **Documentation**: Check the [doc/](doc/) folder for detailed guides
+- **Issues**: Create an issue for bug reports or feature requests
+- **Discussions**: Use GitHub Discussions for questions
+
+---
+
+**Built with ❤️ using Django and Flutter** 
