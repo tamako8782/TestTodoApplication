@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TODO LIST{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .font-kanit {
+            font-family: 'Kanit', sans-serif;
+        }
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-neutral-800 min-h-screen">
+    <div class="w-full max-w-[1400px] mx-auto h-screen relative overflow-hidden">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    <!-- Modal overlay -->
+    <div id="modalOverlay" class="hidden fixed inset-0 bg-neutral-800/70 z-40"></div>
+    
+    <!-- Messages -->
+    {% if messages %}
+        <div id="messages" class="fixed top-4 right-4 z-50">
+            {% for message in messages %}
+                <div class="bg-indigo-500 text-white px-4 py-2 rounded-lg mb-2 shadow-lg">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <script>
+        // Auto-hide messages after 3 seconds
+        setTimeout(function() {
+            const messages = document.getElementById('messages');
+            if (messages) {
+                messages.style.display = 'none';
+            }
+        }, 3000);
+        
+        // Modal functionality
+        function showModal() {
+            document.getElementById('modalOverlay').classList.remove('hidden');
+            document.getElementById('addTodoModal').classList.remove('hidden');
+        }
+        
+        function hideModal() {
+            document.getElementById('modalOverlay').classList.add('hidden');
+            document.getElementById('addTodoModal').classList.add('hidden');
+        }
+        
+        // Close modal when clicking overlay
+        document.getElementById('modalOverlay').addEventListener('click', hideModal);
+    </script>
+</body>
+</html> 

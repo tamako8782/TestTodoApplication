@@ -1,0 +1,113 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<div class="pt-10 left-[325px] top-0 absolute inline-flex flex-col justify-start items-center gap-4">
+    <div class="justify-start text-neutral-100 text-2xl font-medium font-kanit">TODO LIST</div>
+    <div class="w-[750px] inline-flex justify-start items-start gap-4">
+        <!-- Search Form -->
+        <form method="GET" class="h-9 px-4 py-2 rounded-[5px] outline outline-1 outline-offset-[-1px] outline-neutral-100 flex justify-start items-center gap-96">
+            <input type="text" name="search" value="{{ request.GET.search }}" 
+                   placeholder="Search note..." 
+                   class="bg-transparent text-neutral-100 placeholder-stone-500 text-base font-medium font-inter leading-none outline-none w-full">
+            <button type="submit" class="w-5 h-5 bg-neutral-100 rounded"></button>
+        </form>
+        
+        <!-- Filter Buttons -->
+        <div class="p-2.5 bg-indigo-500 rounded-[5px] inline-flex flex-col justify-start items-start gap-2.5">
+            <div class="justify-start text-neutral-100 text-lg font-medium font-kanit uppercase leading-none">all</div>
+            <div class="flex gap-1">
+                <div class="w-[3px] h-[3px] outline outline-1 outline-offset-[-0.50px] outline-neutral-100"></div>
+                <div class="w-[3px] h-[3px] outline outline-1 outline-offset-[-0.50px] outline-neutral-100"></div>
+            </div>
+        </div>
+        
+        <!-- Add Button -->
+        <button onclick="showModal()" class="w-9 h-9 bg-indigo-500 rounded-[5px] flex items-center justify-center">
+            <div class="w-5 h-5 bg-neutral-100 flex items-center justify-center text-indigo-500 font-bold text-lg leading-none">+</div>
+        </button>
+    </div>
+</div>
+
+<!-- Todo List -->
+<div class="w-[750px] h-[575px] left-[325px] top-[135px] absolute">
+    <!-- Add Todo Button (Floating) -->
+    <button onclick="showModal()" class="w-12 h-12 left-[692px] top-[493px] absolute bg-indigo-500 rounded-full shadow-[0px_0px_4px_0px_rgba(108,99,255,1.00)] flex items-center justify-center">
+        <div class="w-6 h-6 bg-neutral-100 flex items-center justify-center text-indigo-500 font-bold text-xl leading-none">+</div>
+    </button>
+    
+    <!-- Todo Items Container -->
+    <div class="w-[520px] h-[545px] left-[115px] top-[30px] absolute">
+        {% for todo in todos %}
+            <div class="flex items-start gap-4 mb-6 group">
+                <!-- Checkbox -->
+                <form method="post" action="{% url 'todo:toggle' todo.id %}" class="inline">
+                    {% csrf_token %}
+                    <button type="submit" class="w-6 h-6 rounded-sm border border-indigo-500 flex items-center justify-center 
+                                                 {% if todo.completed %}bg-indigo-500{% endif %} 
+                                                 hover:bg-indigo-500/20 transition-colors">
+                        {% if todo.completed %}
+                            <div class="w-1.5 h-3.5 border-l-2 border-t-2 border-neutral-100 transform rotate-[-135deg] translate-x-0.5 translate-y-0.5"></div>
+                        {% endif %}
+                    </button>
+                </form>
+                
+                <!-- Todo Text -->
+                <div class="flex-1 text-neutral-100 text-xl font-medium font-kanit uppercase leading-tight 
+                           {% if todo.completed %}text-white/50 line-through{% endif %}">
+                    {{ todo.title }}
+                </div>
+                
+                <!-- Actions -->
+                <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <form method="post" action="{% url 'todo:delete' todo.id %}" class="inline" onsubmit="return confirm('このTodoを削除しますか？')">
+                        {% csrf_token %}
+                        <button type="submit" class="w-4 h-4 text-red-400 hover:text-red-300">
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Separator Line -->
+            {% if not forloop.last %}
+                <div class="w-[520px] h-0 opacity-50 outline outline-1 outline-offset-[-0.50px] outline-indigo-500 mb-4"></div>    
+            {% endif %}
+        {% empty %}
+            <div class="text-center text-neutral-400 text-lg font-inter mt-20">
+                <p>まだTodoがありません。</p>
+                <p class="text-sm mt-2">右上の + ボタンから新しいTodoを追加してください。</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Add Todo Modal -->
+<div id="addTodoModal" class="hidden fixed inset-0 flex items-center justify-center z-50">
+    <div class="w-[500px] h-72 bg-neutral-800 rounded-2xl border border-neutral-100 p-8">
+        <h2 class="text-neutral-100 text-2xl font-medium font-kanit uppercase leading-normal text-center mb-8">New Note</h2>
+        
+        <form method="post" action="{% url 'todo:add' %}">
+            {% csrf_token %}
+            <input type="text" name="title" required
+                   placeholder="Input your note..." 
+                   class="w-full h-9 px-4 py-2 rounded-[5px] outline outline-1 outline-offset-[-1px] outline-neutral-100 
+                          bg-transparent text-neutral-100 placeholder-stone-500 text-base font-medium font-inter leading-none mb-8">
+            
+            <div class="flex justify-end gap-4">
+                <button type="button" onclick="hideModal()" 
+                        class="px-5 py-2.5 rounded-[5px] outline outline-1 outline-offset-[-1px] outline-indigo-500 
+                               text-indigo-500 text-lg font-medium font-kanit uppercase leading-none hover:bg-indigo-500/10 transition-colors">
+                    Cancel
+                </button>
+                <button type="submit" 
+                        class="px-5 py-2.5 bg-indigo-500 rounded-[5px] text-neutral-100 text-lg font-medium font-kanit uppercase leading-none 
+                               hover:bg-indigo-600 transition-colors">
+                    Apply
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %} 
