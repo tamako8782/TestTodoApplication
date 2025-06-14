@@ -119,12 +119,13 @@ test_todo/
 
 ### 📚 ドキュメント構成
 
-1. **[Flutter環境構築](01_flutter_setup.md)** - Flutterプロジェクト作成からAPI統合まで
-2. **[Xcode設定・ビルド](02_xcode_config.md)** - Xcodeでのプロジェクト設定とビルド手順
-3. **[iPhoneデプロイ](03_deployment.md)** - 実機へのデプロイとネットワーク設定
-4. **[テスト実装](04_testing.md)** - 包括的テストスイートの詳細
-5. **[トラブルシューティング](05_troubleshooting.md)** - 発生した問題と解決方法
-6. **[Django REST API](06_django_api.md)** - REST API設計・実装・仕様書
+1.  **[プロジェクト概要](README.md)** - プロジェクト全体の概要と開発の旅程
+2.  **[Django REST API](01_django_api.md)** - REST API設計・実装・仕様書
+3.  **[Flutter環境構築](02_flutter_setup.md)** - Flutterプロジェクト作成からAPI統合まで
+4.  **[Xcode設定・ビルド](03_xcode_config.md)** - Xcodeでのプロジェクト設定とビルド手順
+5.  **[iPhoneデプロイ](04_deployment.md)** - 実機へのデプロイとネットワーク設定
+6.  **[テスト実装](05_testing.md)** - 包括的テストスイートの詳細
+7.  **[トラブルシューティング](06_troubleshooting.md)** - 発生した問題と解決方法
 
 ### ⏱️ 開発タイムライン
 
